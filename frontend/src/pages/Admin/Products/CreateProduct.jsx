@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Button, Form, Input, Checkbox, Select } from "antd";
+import { Button, Form, Input, Checkbox, Select, message } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const CreateProduct = () => {
   const [form] = Form.useForm();
-  const [formLayout, setFormLayout] = useState("vertical");
+  const navigate = useNavigate();
+  const formLayout = "vertical";
   const { TextArea } = Input;
-  const onFormLayoutChange = ({ layout }) => {
-    setFormLayout(layout);
-  };
   const [categories, setCategories] = useState([]);
   const plainOptions = ["Red", "Blue", "Green"];
+  const sizeOption = ["XS", "SM", "M", "L", "XL", "XXL"];
+
   const getCategories = async () => {
     try {
       const response = await fetch("http://localhost:5000/api/categories");
@@ -24,10 +25,30 @@ const CreateProduct = () => {
       console.log("Sunucu hatası...");
     }
   };
+
+  const addProduct = async (values) => {
+    const { colors, sizes, ...restValues } = values;
+    try {
+      const response = await fetch("http://localhost:5000/api/products", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({...restValues, colors, sizes}),
+      });
+      if (response.ok) {
+        message.success("Ürün başarıyla oluşturuldu.");
+        navigate("/admin/products");
+      } else {
+        console.log("Kayıt işleminde hata meydana geldi...");
+      }
+    } catch (error) {
+      console.log("Sunucu hatası...");
+    }
+  };
   useEffect(() => {
     getCategories();
   }, []);
-  const sizeOption = ["XS", "SM", "M", "L", "XL", "XXL"];
   return (
     <div>
       <h2>Product Add Panel</h2>
@@ -35,6 +56,7 @@ const CreateProduct = () => {
         layout={formLayout}
         form={form}
         initialValues={{ layout: formLayout, colors: ["Red"], sizes: ["M"] }}
+        onFinish={addProduct}
       >
         <Form.Item
           label="Product Name"
@@ -72,8 +94,8 @@ const CreateProduct = () => {
           <Checkbox.Group options={plainOptions} defaultValue={["Green"]} />
         </Form.Item>
         <Form.Item
-          name="sizes"
           label="Sizes"
+          name="sizes"
           rules={[{ required: true, message: "Please select a Sizes!" }]}
         >
           <Checkbox.Group options={sizeOption} defaultValue={["M"]} />
@@ -102,7 +124,9 @@ const CreateProduct = () => {
           </Select>
         </Form.Item>
         <Form.Item style={{ marginTop: "15px" }}>
-          <Button type="primary">Create Product</Button>
+          <Button type="primary" htmlType="submit">
+            Create Product
+          </Button>
         </Form.Item>
       </Form>
     </div>
