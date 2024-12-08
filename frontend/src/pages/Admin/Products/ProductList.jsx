@@ -1,66 +1,89 @@
-import React, { useEffect, useState } from 'react'
-import { Button, Space, Table } from "antd";
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { Button, message, Space, Table } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const ProductList = () => {
   const [dataSource, setDataSource] = useState([]);
   const navigate = useNavigate();
   const getProducts = async () => {
     try {
-      const [categoryResponse,productResponse] = await Promise.all(
-        [fetch("http://localhost:5000/api/categories"),fetch("http://localhost:5000/api/products")]
-      );
-      if(!categoryResponse.ok || !productResponse.ok){
+      const [categoryResponse, productResponse] = await Promise.all([
+        fetch("http://localhost:5000/api/categories"),
+        fetch("http://localhost:5000/api/products"),
+      ]);
+      if (!categoryResponse.ok || !productResponse.ok) {
         console.log("Veri getirilirken bir hata meydana geldi.");
-        
-      }else{
-        const [categories,products] = await Promise.all([
+      } else {
+        const [categories, products] = await Promise.all([
           categoryResponse.json(),
-          productResponse.json()
+          productResponse.json(),
         ]);
-        const productList = products.map(product => {
+        const productList = products.map((product) => {
           const categoryId = product.category;
-          const category  = categories.find(item => item._id === categoryId);
+          const category = categories.find((item) => item._id === categoryId);
 
-          return {...product,categoryName : category ? category.name : ""}
+          return { ...product, categoryName: category ? category.name : "" };
         });
         setDataSource(productList);
       }
-        
-      
     } catch (error) {
       console.log("Sunucu hatası...");
     }
-  }
-  useEffect(()=>{
-    
+  };
+
+  const deleteProduct = async (productId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:5000/api/products/${productId}`,
+        {
+          method: "DELETE",
+        }
+      );
+      if (response.ok) {
+        message.success("Ürün başarıyla silindi...");
+        setDataSource((prevProduct) => {
+          return prevProduct.filter((product) => product._id !== productId);
+        });
+      } else {
+        message.error("Silme işlemi başarısız...");
+      }
+    } catch (error) {
+      console.log("Sunucu hatası...");
+    }
+  };
+  useEffect(() => {
     getProducts();
-  },[]);
-  
-  
+  }, []);
+
   const columns = [
     {
-      title: 'Image',
-      dataIndex: 'img',
-      key: 'img',
-      render : (img,record) => (<img src={`/${record.img[0]}`} alt="Product img" style={{width:"50px"}}/>)
+      title: "Image",
+      dataIndex: "img",
+      key: "img",
+      render: (img, record) => (
+        <img
+          src={`/${record.img[0]}`}
+          alt="Product img"
+          style={{ width: "50px" }}
+        />
+      ),
     },
     {
-      title: 'Name',
-      dataIndex: 'name',
-      key: 'name',
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
     },
     {
-      title: 'Description',
-      dataIndex: 'description',
-      key: 'description',
+      title: "Description",
+      dataIndex: "description",
+      key: "description",
     },
     {
-      title: 'Colors',
-      dataIndex: 'colors',
-      key: 'colors',
+      title: "Colors",
+      dataIndex: "colors",
+      key: "colors",
       render: (colors) => (
-        <div style={{display : "flex", flexWrap:"wrap"}}>
+        <div style={{ display: "flex", flexWrap: "wrap" }}>
           {colors.map((item, index) => (
             <div
               key={index}
@@ -78,48 +101,61 @@ const ProductList = () => {
       ),
     },
     {
-      title: 'Sizes',
-      dataIndex: 'sizes',
-      key: 'sizes',
+      title: "Sizes",
+      dataIndex: "sizes",
+      key: "sizes",
       render: (sizes) => (
         <div>
           {sizes.map((item, index) => (
-            <p style={{textAlign:"center"}} key={index}>{item}</p>
+            <p style={{ textAlign: "center" }} key={index}>
+              {item}
+            </p>
           ))}
         </div>
       ),
     },
     {
-      title: 'Discount',
-      dataIndex: 'discount',
-      key: 'discount',
+      title: "Discount",
+      dataIndex: "discount",
+      key: "discount",
     },
     {
-      title: 'Category',
-      dataIndex: 'categoryName',
-      key: 'categoryName',
+      title: "Category",
+      dataIndex: "categoryName",
+      key: "categoryName",
     },
     {
-      title: 'Action',
-      key: 'action',
+      title: "Action",
+      key: "action",
       render: (_, record) => (
-        <Space size="small" style={{display:"flex", flexDirection:"column"}}>
-          <Button onClick={() => navigate(`/admin/products/update/${record._id}`)} color="success" variant="solid">
-          Update
+        <Space
+          size="small"
+          style={{ display: "flex", flexDirection: "column" }}
+        >
+          <Button
+            onClick={() => navigate(`/admin/products/update/${record._id}`)}
+            color="success"
+            variant="solid"
+          >
+            Update
           </Button>
-          <Button color="danger" variant="solid">
-          Remove
+          <Button
+            color="danger"
+            variant="solid"
+            onClick={() => deleteProduct(record._id)}
+          >
+            Remove
           </Button>
         </Space>
       ),
-    }
+    },
   ];
-  return (  
+  return (
     <React.Fragment>
       <h2>Product List</h2>
-    <Table dataSource={dataSource} columns={columns} />
-    </React.Fragment>  
-  )
-}
+      <Table dataSource={dataSource} columns={columns} />
+    </React.Fragment>
+  );
+};
 
-export default ProductList
+export default ProductList;

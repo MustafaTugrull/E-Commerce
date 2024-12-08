@@ -1,10 +1,49 @@
 import React, { useEffect, useState } from "react";
-import { Button, Space, Table } from "antd";
+import { Button, message, Space, Table } from "antd";
 import { useNavigate } from "react-router-dom";
 
 const UserList = () => {
   const [dataSource, setDataSource] = useState([]);
   const navigate = useNavigate();
+
+  const getUsers = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/api/users");
+
+      if (response.ok) {
+        const data = await response.json();
+        setDataSource(data);
+      } else {
+        console.log("Veri getirilirken bir sorun meydana geldi...");
+      }
+    } catch (error) {
+      console.log("Sunucu hatası...");
+    }
+  };
+  useEffect(() => {
+    getUsers();
+  }, []);
+
+  const deleteUser = async (userId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:5000/api/users/${userId}`,
+        {
+          method: "DELETE",
+        }
+      );
+      if (response.ok) {
+        message.success("Kullanıcı başarıyla silindi...");
+        setDataSource((prevProduct) => {
+          return prevProduct.filter((user) => user._id !== userId);
+        });
+      } else {
+        message.error("Silme işlemi başarısız...");
+      }
+    } catch (error) {
+      console.log("Sunucu hatası...");
+    }
+  };
 
   const columns = [
     {
@@ -40,13 +79,17 @@ const UserList = () => {
       render: (_, record) => (
         <Space size="middle">
           <Button
-            onClick={() => navigate("/admin/users/update")}
+            onClick={() => navigate(`/admin/users/update/${record._id}`)}
             color="success"
             variant="solid"
           >
             Update
           </Button>
-          <Button color="danger" variant="solid">
+          <Button
+            color="danger"
+            variant="solid"
+            onClick={() => deleteUser(record._id)}
+          >
             Remove
           </Button>
         </Space>
@@ -54,23 +97,6 @@ const UserList = () => {
     },
   ];
 
-  const getUsers = async () => {
-    try {
-      const response = await fetch("http://localhost:5000/api/users");
-
-      if (response.ok) {
-        const data = await response.json();
-        setDataSource(data);
-      } else {
-        console.log("Veri getirilirken bir sorun meydana geldi...");
-      }
-    } catch (error) {
-      console.log("Sunucu hatası...");
-    }
-  };
-  useEffect(() => {
-    getUsers();
-  }, []);
   return (
     <Table
       dataSource={dataSource}

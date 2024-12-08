@@ -19,6 +19,7 @@ import Blogs from "./pages/Admin/Blogs/Blogs";
 import CreateBlog from "./pages/Admin/Blogs/CreateBlog";
 import UpdateBlogs from "./pages/Admin/Blogs/UpdateBlog";
 import UserList from "./pages/Admin/Users/UserList";
+import UpdateUser from "./pages/Admin/Users/UpdateUser";
 function App() {
   return (
     <div className="App">
@@ -43,6 +44,7 @@ function App() {
           <Route path="blogs/create" element={<CreateBlog />} />
           <Route path="blogs/update/:id" element={<UpdateBlogs />} />
           <Route path="users" element={<UserList />} />
+          <Route path="users/update/:id" element={<UpdateUser />} />
         </Route>
       </Routes>
     </div>
