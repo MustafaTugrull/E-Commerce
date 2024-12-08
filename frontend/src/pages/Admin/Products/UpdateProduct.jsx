@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Button, Form, Input, Checkbox, Select } from "antd";
+import { Button, Form, Input, Checkbox, Select, message } from "antd";
+import { useNavigate, useParams } from "react-router-dom";
 
 const UpdateProduct = () => {
   const [form] = Form.useForm();
-  const [formLayout, setFormLayout] = useState("vertical");
+  const navigate = useNavigate();
+  const params = useParams();
+  const productId = params.id;
+  const formLayout = "vertical";
   const { TextArea } = Input;
-  const onFormLayoutChange = ({ layout }) => {
-    setFormLayout(layout);
-  };
   const [categories, setCategories] = useState([]);
-  const plainOptions = ["Red", "Blue", "Green"];
+  const plainOptions = ["red", "blue", "green", "purple", "black"];
+  const sizeOption = ["XS", "SM", "M", "L", "XL", "XXL"];
+  
   const getCategories = async () => {
     try {
       const response = await fetch("http://localhost:5000/api/categories");
@@ -18,23 +21,67 @@ const UpdateProduct = () => {
         const data = await response.json();
         setCategories(data);
       } else {
-        console.log("Veri getirme işlemi başarısız...");
+        message.error("Kategoriler alınamadı.");
+      }
+    } catch (error) {
+      message.error("Sunucu hatası...");
+    }
+  };
+
+  const getProduct = async () => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/products/${productId}`)
+      if (response.ok) {
+        const data = await response.json();
+        form.setFieldsValue({
+          ...data,
+          colors: data.colors , 
+          sizes: data.sizes ,       
+        });
+      } else {
+        message.error("Ürün verisi alınamadı.");
+      }
+    } catch (error) {
+      message.error("Sunucu hatası...");
+    }
+  }
+
+  const updateProduct = async (values) => {
+    const { colors, sizes, ...restValues } = values;
+    try {
+      const response = await fetch(`http://localhost:5000/api/products/${productId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({...restValues, colors, sizes}),
+      });
+      if (response.ok) {
+        message.success("Ürün başarıyla güncellendi.");
+        navigate("/admin/products");
+      } else {
+        message.error("Ürün güncelleme işleminde hata meydana geldi.");
       }
     } catch (error) {
       console.log("Sunucu hatası...");
     }
   };
+
   useEffect(() => {
+    getProduct();
     getCategories();
-  }, []);
-  const sizeOption = ["XS", "SM", "M", "L", "XL", "XXL"];
+  }, [productId]);
+
   return (
     <div>
       <h2>Product Update Panel</h2>
       <Form
         layout={formLayout}
         form={form}
-        initialValues={{ layout: formLayout, colors: ["Red"], sizes: ["M"] }}
+        initialValues={{
+          layout: formLayout,
+        }}
+        onFinish={updateProduct}
       >
         <Form.Item
           label="Product Name"
@@ -69,7 +116,7 @@ const UpdateProduct = () => {
           label="Colors"
           rules={[{ required: true, message: "Please select a Colors!" }]}
         >
-          <Checkbox.Group options={plainOptions} defaultValue={["Green"]} />
+          <Checkbox.Group options={plainOptions} defaultValue={["Green".toLocaleLowerCase()]} />
         </Form.Item>
         <Form.Item
           name="sizes"
@@ -102,7 +149,7 @@ const UpdateProduct = () => {
           </Select>
         </Form.Item>
         <Form.Item style={{ marginTop: "15px" }}>
-          <Button type="primary">Update Product</Button>
+          <Button type="primary" htmlType="submit">Update Product</Button>
         </Form.Item>
       </Form>
     </div>

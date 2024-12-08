@@ -8,7 +8,7 @@ const CreateProduct = () => {
   const formLayout = "vertical";
   const { TextArea } = Input;
   const [categories, setCategories] = useState([]);
-  const plainOptions = ["Red", "Blue", "Green"];
+  const plainOptions = ["Red", "Blue", "Green", "Purple", "Black"];
   const sizeOption = ["XS", "SM", "M", "L", "XL", "XXL"];
 
   const getCategories = async () => {
