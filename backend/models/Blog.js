@@ -4,7 +4,11 @@ const blogSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
     img: { type: String, default: "" },
-    subject: { type: String, default: "" },
+    category: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",
+      required: true,
+    },
     description: { type: String, default: "" },
     reviews: [
       {
