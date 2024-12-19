@@ -3,211 +3,211 @@ import React from 'react'
 const ProductSingle = () => {
   return (
     <div>
-        <section class="products">
-    <div class="container">
-      <div class="section-title">
+        <section className="products">
+    <div className="container">
+      <div className="section-title">
         <h2>New Arrivals</h2>
         <p>Summer Collection New Morden Design</p>
       </div>
-      <div class="product-wrapper product-carousel2">
-        <div class="glide__track">
-          <ul class="product-list glide__slides">
-            <li class="product-item glide__slide">
-              <div class="product-image">
+      <div className="product-wrapper product-carousel2">
+        <div className="glide__track">
+          <ul className="product-list glide__slides">
+            <li className="product-item glide__slide">
+              <div className="product-image">
                 <a href="#">
-                  <img src="img/products/product1/1.png" alt="" class="img1"/>
-                  <img src="img/products/product1/2.png" alt="" class="img2"/>
+                  <img src="img/products/product1/1.png" alt="" className="img1"/>
+                  <img src="img/products/product1/2.png" alt="" className="img2"/>
                 </a>
               </div>
-              <div class="product-info">
-                <a href="$" class="product-title">Analogue Resin Strap</a>
-                <ul class="product-star">
+              <div className="product-info">
+                <a href="$" className="product-title">Analogue Resin Strap</a>
+                <ul className="product-star">
                   <li>
-                    <i class="bi bi-star-fill"></i>
+                    <i className="bi bi-star-fill"></i>
                   </li>
                   <li>
-                    <i class="bi bi-star-fill"></i>
+                    <i className="bi bi-star-fill"></i>
                   </li>
                   <li>
-                    <i class="bi bi-star-fill"></i>
+                    <i className="bi bi-star-fill"></i>
                   </li>
                   <li>
-                    <i class="bi bi-star-fill"></i>
+                    <i className="bi bi-star-fill"></i>
                   </li>
                   <li>
-                    <i class="bi bi-star-half"></i>
+                    <i className="bi bi-star-half"></i>
                   </li>
                 </ul>
-                <div class="product-prices">
-                  <strong class="new-price">$108.00</strong>
-                  <span class="old-price">$165.00</span>
+                <div className="product-prices">
+                  <strong className="new-price">$108.00</strong>
+                  <span className="old-price">$165.00</span>
                 </div>
-                <span class="product-discount">-17%</span>
-                <div class="product-links">
+                <span className="product-discount">-17%</span>
+                <div className="product-links">
                   <button>
-                    <i class="bi bi-basket-fill"></i>
+                    <i className="bi bi-basket-fill"></i>
                   </button>
                   <button>
-                    <i class="bi bi-heart-fill"></i>
+                    <i className="bi bi-heart-fill"></i>
                   </button>
                   <a href="#">
-                    <i class="bi bi-eye-fill"></i>
+                    <i className="bi bi-eye-fill"></i>
                   </a>
                   <a href="#">
-                    <i class="bi bi-share-fill"></i>
+                    <i className="bi bi-share-fill"></i>
                   </a>
                 </div>
               </div>
             </li>
-            <li class="product-item glide__slide">
-              <div class="product-image">
+            <li className="product-item glide__slide">
+              <div className="product-image">
                 <a href="#">
-                  <img src="img/products/product2/1.png" alt="" class="img1"/>
-                  <img src="img/products/product2/2.png" alt="" class="img2"/>
+                  <img src="img/products/product2/1.png" alt="" className="img1"/>
+                  <img src="img/products/product2/2.png" alt="" className="img2"/>
                 </a>
               </div>
-              <div class="product-info">
-                <a href="$" class="product-title">Analogue Resin Strap</a>
-                <ul class="product-star">
+              <div className="product-info">
+                <a href="$" className="product-title">Analogue Resin Strap</a>
+                <ul className="product-star">
                   <li>
-                    <i class="bi bi-star-fill"></i>
+                    <i className="bi bi-star-fill"></i>
                   </li>
                   <li>
-                    <i class="bi bi-star-fill"></i>
+                    <i className="bi bi-star-fill"></i>
                   </li>
                   <li>
-                    <i class="bi bi-star-fill"></i>
+                    <i className="bi bi-star-fill"></i>
                   </li>
                   <li>
-                    <i class="bi bi-star-fill"></i>
+                    <i className="bi bi-star-fill"></i>
                   </li>
                   <li>
-                    <i class="bi bi-star-half"></i>
+                    <i className="bi bi-star-half"></i>
                   </li>
                 </ul>
-                <div class="product-prices">
-                  <strong class="new-price">$108.00</strong>
-                  <span class="old-price">$165.00</span>
+                <div className="product-prices">
+                  <strong className="new-price">$108.00</strong>
+                  <span className="old-price">$165.00</span>
                 </div>
-                <span class="product-discount">-17%</span>
-                <div class="product-links">
+                <span className="product-discount">-17%</span>
+                <div className="product-links">
                   <button>
-                    <i class="bi bi-basket-fill"></i>
+                    <i className="bi bi-basket-fill"></i>
                   </button>
                   <button>
-                    <i class="bi bi-heart-fill"></i>
+                    <i className="bi bi-heart-fill"></i>
                   </button>
                   <a href="#">
-                    <i class="bi bi-eye-fill"></i>
+                    <i className="bi bi-eye-fill"></i>
                   </a>
                   <a href="#">
-                    <i class="bi bi-share-fill"></i>
+                    <i className="bi bi-share-fill"></i>
                   </a>
                 </div>
               </div>
             </li>
-            <li class="product-item glide__slide">
-              <div class="product-image">
+            <li className="product-item glide__slide">
+              <div className="product-image">
                 <a href="#">
-                  <img src="img/products/product3/1.png" alt="" class="img1"/>
-                  <img src="img/products/product3/2.png" alt="" class="img2"/>
+                  <img src="img/products/product3/1.png" alt="" className="img1"/>
+                  <img src="img/products/product3/2.png" alt="" className="img2"/>
                 </a>
               </div>
-              <div class="product-info">
-                <a href="$" class="product-title">Analogue Resin Strap</a>
-                <ul class="product-star">
+              <div className="product-info">
+                <a href="$" className="product-title">Analogue Resin Strap</a>
+                <ul className="product-star">
                   <li>
-                    <i class="bi bi-star-fill"></i>
+                    <i className="bi bi-star-fill"></i>
                   </li>
                   <li>
-                    <i class="bi bi-star-fill"></i>
+                    <i className="bi bi-star-fill"></i>
                   </li>
                   <li>
-                    <i class="bi bi-star-fill"></i>
+                    <i className="bi bi-star-fill"></i>
                   </li>
                   <li>
-                    <i class="bi bi-star-fill"></i>
+                    <i className="bi bi-star-fill"></i>
                   </li>
                   <li>
-                    <i class="bi bi-star-half"></i>
+                    <i className="bi bi-star-half"></i>
                   </li>
                 </ul>
-                <div class="product-prices">
-                  <strong class="new-price">$108.00</strong>
-                  <span class="old-price">$165.00</span>
+                <div className="product-prices">
+                  <strong className="new-price">$108.00</strong>
+                  <span className="old-price">$165.00</span>
                 </div>
-                <span class="product-discount">-17%</span>
-                <div class="product-links">
+                <span className="product-discount">-17%</span>
+                <div className="product-links">
                   <button>
-                    <i class="bi bi-basket-fill"></i>
+                    <i className="bi bi-basket-fill"></i>
                   </button>
                   <button>
-                    <i class="bi bi-heart-fill"></i>
+                    <i className="bi bi-heart-fill"></i>
                   </button>
                   <a href="#">
-                    <i class="bi bi-eye-fill"></i>
+                    <i className="bi bi-eye-fill"></i>
                   </a>
                   <a href="#">
-                    <i class="bi bi-share-fill"></i>
+                    <i className="bi bi-share-fill"></i>
                   </a>
                 </div>
               </div>
             </li>
-            <li class="product-item">
-              <div class="product-image">
+            <li className="product-item">
+              <div className="product-image">
                 <a href="#">
-                  <img src="img/products/product4/1.png" alt="" class="img1"/>
-                  <img src="img/products/product4/2.png" alt="" class="img2"/>
+                  <img src="img/products/product4/1.png" alt="" className="img1"/>
+                  <img src="img/products/product4/2.png" alt="" className="img2"/>
                 </a>
               </div>
-              <div class="product-info">
-                <a href="$" class="product-title">Analogue Resin Strap</a>
-                <ul class="product-star">
+              <div className="product-info">
+                <a href="$" className="product-title">Analogue Resin Strap</a>
+                <ul className="product-star">
                   <li>
-                    <i class="bi bi-star-fill"></i>
+                    <i className="bi bi-star-fill"></i>
                   </li>
                   <li>
-                    <i class="bi bi-star-fill"></i>
+                    <i className="bi bi-star-fill"></i>
                   </li>
                   <li>
-                    <i class="bi bi-star-fill"></i>
+                    <i className="bi bi-star-fill"></i>
                   </li>
                   <li>
-                    <i class="bi bi-star-fill"></i>
+                    <i className="bi bi-star-fill"></i>
                   </li>
                   <li>
-                    <i class="bi bi-star-half"></i>
+                    <i className="bi bi-star-half"></i>
                   </li>
                 </ul>
-                <div class="product-prices">
-                  <strong class="new-price">$108.00</strong>
-                  <span class="old-price">$165.00</span>
+                <div className="product-prices">
+                  <strong className="new-price">$108.00</strong>
+                  <span className="old-price">$165.00</span>
                 </div>
-                <span class="product-discount">-17%</span>
-                <div class="product-links">
+                <span className="product-discount">-17%</span>
+                <div className="product-links">
                   <button>
-                    <i class="bi bi-basket-fill"></i>
+                    <i className="bi bi-basket-fill"></i>
                   </button>
                   <button>
-                    <i class="bi bi-heart-fill"></i>
+                    <i className="bi bi-heart-fill"></i>
                   </button>
                   <a href="#">
-                    <i class="bi bi-eye-fill"></i>
+                    <i className="bi bi-eye-fill"></i>
                   </a>
                   <a href="#">
-                    <i class="bi bi-share-fill"></i>
+                    <i className="bi bi-share-fill"></i>
                   </a>
                 </div>
               </div>
             </li>
           </ul>
         </div>
-        <div class="glide__arrows">
-          <button class="glide__arrow glide__arrow--left" >
-            <i class="bi bi-chevron-left"></i>
+        <div className="glide__arrows">
+          <button className="glide__arrow glide__arrow--left" >
+            <i className="bi bi-chevron-left"></i>
           </button>
-          <button class="glide__arrow glide__arrow--right">
-            <i class="bi bi-chevron-right"></i>
+          <button className="glide__arrow glide__arrow--right">
+            <i className="bi bi-chevron-right"></i>
           </button>
         </div>
       </div>

@@ -1,21 +1,17 @@
-import React from 'react'
-import "./CategoryItem.css"
+import React from "react";
+import "./CategoryItem.css";
 
-const CategoryItem = () => {
+const CategoryItem = ({ category }) => {
   return (
     <div>
-        <li className="category-item">
-              <a href="#">
-                <img
-                  src="img/categories/categories1.png"
-                  alt=""
-                  className="category-image"
-                />
-                <span className="category-title">Smartphone</span>
-              </a>
-        </li>
+      <li className="category-item">
+        <a>
+          <img src={category.image} alt="" className="category-image" />
+          <span className="category-title">{category.name}</span>
+        </a>
+      </li>
     </div>
-  )
-}
+  );
+};
 
-export default CategoryItem
+export default CategoryItem;

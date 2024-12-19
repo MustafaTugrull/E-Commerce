@@ -1,8 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Blogs.css";
 import BlogItem from "./BlogItem";
+import { message } from "antd";
 
 const Blogs = () => {
+  const [blogs, setBlogs] = useState([]);
+  useEffect(() => {
+    const getBlogs = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/blogs");
+        if (response.ok) {
+          const data = await response.json();
+          setBlogs(data);
+        } else {
+          message.error("Bloglar getirilirken bir sorun meydana geldi...");
+        }
+      } catch (error) {
+        console.log("Sunucu hatası...");
+      }
+    };
+    getBlogs();
+  }, []);
   return (
     <div>
       <section className="blogs blog-page">
@@ -12,39 +30,9 @@ const Blogs = () => {
             <p>Summer Collection New Morden Design</p>
           </div>
           <ul className="blog-list">
-            <BlogItem/>            
-            <li className="blog-item">
-              <a href="#" className="blog-image">
-                <img src="img/blogs/blog2.jpg" alt="" />
-              </a>
-              <div className="blog-info">
-                <div className="blog-info-top">
-                  <span>25 Feb, 2021 </span>-<span>0 Comments</span>
-                </div>
-                <div className="blog-info-center">
-                  <a href="#">Aliquam hendrerit mi metus</a>
-                </div>
-                <div className="blog-info-bottom">
-                  <a href="#">Read More</a>
-                </div>
-              </div>
-            </li>
-            <li className="blog-item">
-              <a href="#" className="blog-image">
-                <img src="img/blogs/blog3.jpg" alt="" />
-              </a>
-              <div className="blog-info">
-                <div className="blog-info-top">
-                  <span>25 Feb, 2021 </span>-<span>0 Comments</span>
-                </div>
-                <div className="blog-info-center">
-                  <a href="#">Aliquam hendrerit mi metus</a>
-                </div>
-                <div className="blog-info-bottom">
-                  <a href="#">Read More</a>
-                </div>
-              </div>
-            </li>
+            {blogs.map((blog) => (
+              <BlogItem key={blog._id} blog={blog} />
+            ))}
           </ul>
         </div>
       </section>

@@ -1,8 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Products.css";
 import ProductItem from "./ProductItem";
+import { message } from "antd";
 
 const Products = () => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/products");
+        if (response.ok) {
+          const data = await response.json();
+          setProducts(data);
+        } else {
+          message.error("Ürünler getirilirken bir sorun meydana geldi...");
+        }
+      } catch (error) {
+        console.log("Sunucu hatası...");
+      }
+    };
+    getProducts();
+  }, [setProducts]);
+
   return (
     <div>
         <section className="products">
@@ -14,10 +34,10 @@ const Products = () => {
       <div className="product-wrapper product-carousel">
         <div className="glide__track">
           <ul className="product-list glide__slides" id="product-list">
-            <ProductItem/>
-            <ProductItem/>
-            <ProductItem/>
-            <ProductItem/>
+          {products.map((product) => (
+              <ProductItem key={product._id} product={product} />
+            ))}
+            
           </ul>
         </div>
         <div className="glide__arrows">

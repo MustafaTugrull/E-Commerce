@@ -9,14 +9,14 @@ import Dialog from '../components/Modals/Dialog'
 const MainLayout = ({children}) => {
   const [isShow, setIsShow] = useState(false);
   return (
-    <>
+    <div className='main-layout'>
         <Header setIsShow={setIsShow}/>
         <Search isShow={isShow} setIsShow={setIsShow} />
         <Dialog/>
         {children }
         <Policy/>
         <Footer/>
-    </>
+    </div>
   )
 }
 
