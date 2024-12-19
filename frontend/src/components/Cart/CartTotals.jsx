@@ -2,11 +2,11 @@ import React from "react";
 
 const CartTotals = () => {
   return (
-    <div class="cart-totals">
+    <div className="cart-totals">
       <h2>Cart totals</h2>
       <table>
         <tbody>
-          <tr class="cart-subtotal">
+          <tr className="cart-subtotal">
             <th>Subtotal</th>
             <td>
               <span id="subtotal">$316.00</span>
@@ -36,8 +36,8 @@ const CartTotals = () => {
           </tr>
         </tbody>
       </table>
-      <div class="checkout">
-        <button class="btn btn-lg">Proceed to checkout</button>
+      <div className="checkout">
+        <button className="btn btn-lg">Proceed to checkout</button>
       </div>
     </div>
   );

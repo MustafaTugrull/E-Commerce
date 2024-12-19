@@ -1,10 +1,11 @@
 import React from 'react'
 import "./ProductInfo.css"
 
-const ProductInfo = () => {
+const ProductInfo = ({product}) => {
+  
   return (
     <div className="product-info">
-          <h1 className="product-title">Ridley High Waist</h1>
+          <h1 className="product-title">{product?.name}</h1>
           <div className="product-review">
             <ul className="product-star">
               <li>
@@ -26,12 +27,11 @@ const ProductInfo = () => {
             <span>2 reviews</span>
           </div>
           <div className="product-price">
-            <s className="old-price">$165</s>
-            <strong className="new-price">$100</strong>
+            <s className="old-price">${product?.price}</s>
+            <strong className="new-price">${(product?.price * (1 - product?.discount)).toFixed(2)}</strong>
           </div>
           <p className="product-description">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          {product?.description}
           </p>
           <form className="variations-form">
             <div className="variations">
@@ -104,7 +104,7 @@ const ProductInfo = () => {
           <div className="product-meta">
             <div className="product-sku">
               <span>SKU:</span>
-              <strong>BE45VGRT</strong>
+              <strong>{product?.stockCode}</strong>
             </div>
             <div className="product-categories">
               <span>Categories:</span>

@@ -10,13 +10,15 @@ const ProductItem = ({ product }) => {
     <div>
       <li className="product-item glide__slide">
         <div className="product-image">
-          <a href="">
+          <Link to={`/productDetail/${product._id}`}>
             <img src={product.img[0]} alt="" className="img1" />
             <img src={product.img[1]} alt="" className="img2" />
-          </a>
+          </Link>
         </div>
         <div className="product-info">
-                <a href="$" className="product-title">Analogue Resin Strap</a>
+          <Link to={`/productDetail/${product._id}`} className="product-title">
+            {product.name}
+          </Link>
           <ul className="product-star">
             <li>
               <i className="bi bi-star-fill"></i>
@@ -48,9 +50,9 @@ const ProductItem = ({ product }) => {
             <button>
               <i className="bi bi-heart-fill"></i>
             </button>
-                  <a href="#">
+            <Link to={`/productDetail/${product._id}`}>
               <i className="bi bi-eye-fill"></i>
-                  </a>
+            </Link>
             <a href="#">
               <i className="bi bi-share-fill"></i>
             </a>
