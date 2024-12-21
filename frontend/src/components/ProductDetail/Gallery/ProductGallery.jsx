@@ -1,13 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./ProductGallery.css";
 
-const ProductGallery = ({product}) => {
+const ProductGallery = ({ singleProduct }) => {
+  const [productImages, setProductImages] = useState(singleProduct?.img || []);
+  const [activeImage, setActiveImage] = useState(singleProduct?.img[0] || "");
+
+  useEffect(() => {
+    if (singleProduct?.img) {
+      setProductImages(singleProduct.img);
+      setActiveImage(singleProduct.img[0]);
+    }
+  }, [singleProduct]);
+
+  const handleThumbnailClick = (image) => {
+    setActiveImage(image);
+  };
+
   return (
     <div className="product-gallery">
       <div className="single-image-wrapper">
-        {/* Ana görsel */}
         <img
-          src={`/${product?.img[0]}`}
+          src={`/${activeImage}`}
           id="single-image"
           alt="Product main view"
         />
@@ -15,17 +28,18 @@ const ProductGallery = ({product}) => {
       <div className="product-thumb">
         <div className="glide__track" data-glide-el="track">
           <ol className="gallery-thumbs glide__slides">
-            {product?.img && product.img.length > 0 &&
-              product.img.map((image, index) => (
+            {productImages.length > 0 &&
+              productImages.map((image, index) => (
                 <li
                   key={index}
-                  className={`glide__slide ${index === 0 ? "glide__slide--active" : ""}`}
+                  className={`glide__slide ${image === activeImage ? "glide__slide--active" : ""}`}
                   style={{ width: "109px", marginRight: "5px" }}
                 >
                   <img
-                    src={`/${image}`} 
+                    src={`/${image}`}
                     alt={`Product thumbnail ${index + 1}`}
                     className="img-fluid"
+                    onClick={() => handleThumbnailClick(image)}
                   />
                 </li>
               ))

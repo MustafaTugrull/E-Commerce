@@ -6,7 +6,7 @@ import { message } from 'antd';
 const ProductDetail = () => {
   const params = useParams();  
   const id = params.id;
-  const [product, setProduct] = useState(null);
+  const [singleProduct, setSingleProduct] = useState(null);
 
   useEffect(() => {
     const getProduct = async () => {
@@ -14,7 +14,7 @@ const ProductDetail = () => {
         const response = await fetch(`http://localhost:5000/api/products/${id}`);
         if (response.ok) {
           const productData = await response.json();
-          setProduct(productData);
+          setSingleProduct(productData);
         } else {
           message.error("Ürün detayı alınamadı.");
         }
@@ -27,7 +27,7 @@ const ProductDetail = () => {
     window.scrollTo(0, 0);
   }, [id]);
   return (
-    <SingleProductDetail product={product}/>
+    <SingleProductDetail singleProduct={singleProduct}/>
   )
 }
 

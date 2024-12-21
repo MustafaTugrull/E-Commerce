@@ -5,13 +5,13 @@ import ProductTabs from './Tabs/ProductTabs'
 import "./SingleProductDetail.css"
 import CampaignSingle from '../CampaignSingle/CampaignSingle'
 
-const SingleProductDetail = ({ product }) => {
+const SingleProductDetail = ({ singleProduct }) => {
   return (
     <section className="single-product">
         <div className="container">
             <div className="single-product-wrapper">
                 <Breadcrumb />
-                <SingleContent product={product}/>
+                <SingleContent singleProduct={singleProduct}/>
                 <ProductTabs />
             </div>
         </div>

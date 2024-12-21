@@ -1,10 +1,11 @@
 import React, {useContext} from "react";
 import "./ProductItem.css";
 import { CartContext } from "../../contexts/CartProvider";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const ProductItem = ({ product }) => {
   const { addToCart} = useContext(CartContext)
+  const navigate = useNavigate();
   
   return (
     <div>
@@ -50,11 +51,11 @@ const ProductItem = ({ product }) => {
             <button>
               <i className="bi bi-heart-fill"></i>
             </button>
-            <Link to={`/productDetail/${product._id}`}>
-              <i className="bi bi-eye-fill"></i>
-            </Link>
-            <a href="#">
-              <i className="bi bi-share-fill"></i>
+            <a onClick={()=> navigate(`productDetail/${product._id}`)}>
+              <i className="bi bi-eye-fill" ></i>
+            </a>
+            <a href={`productDetail/${product._id}`}>
+              <i className="bi bi-share-fill" onClick={() => navigate()}></i>
             </a>
           </div>
         </div>
