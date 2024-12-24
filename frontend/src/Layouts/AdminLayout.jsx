@@ -100,12 +100,36 @@ const AdminLayout = ({ children }) => {
     },
     {
       key: "5",
+      icon: <LaptopOutlined />,
+      label: "Coupons",
+      path: "/",
+      children: [
+        {
+          key: "5-1",
+          label: "Coupon List",
+          path: "/admin/coupons",
+          onClick: () => {
+            navigate("/admin/coupons");
+          },
+        },
+        {
+          key: "5-2",
+          label: "Add Coupon",
+          path: "/admin/coupons/create",
+          onClick: () => {
+            navigate("/admin/coupons/create");
+          },
+        },
+      ],
+    },
+    {
+      key: "6",
       icon: <UsergroupAddOutlined />,
       label: "Users",
       path: "/",
       children: [
         {
-          key: "5-1",
+          key: "6-1",
           label: "User List",
           path: "/admin/blogs",
           onClick: () => {

@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "./ProductGallery.css";
+import { ProductContext } from "../../../contexts/ProductProvider";
 
-const ProductGallery = ({ singleProduct }) => {
+const ProductGallery = () => {
+  const { singleProduct } = useContext(ProductContext);
   const [productImages, setProductImages] = useState(singleProduct?.img || []);
   const [activeImage, setActiveImage] = useState(singleProduct?.img[0] || "");
 
@@ -16,14 +18,12 @@ const ProductGallery = ({ singleProduct }) => {
     setActiveImage(image);
   };
 
+  if (!singleProduct) return <div>Product not found</div>; // Eğer ürün verisi yoksa gösterilecek içerik
+
   return (
     <div className="product-gallery">
       <div className="single-image-wrapper">
-        <img
-          src={`/${activeImage}`}
-          id="single-image"
-          alt="Product main view"
-        />
+        <img src={`/${activeImage}`} id="single-image" alt="Product main view" />
       </div>
       <div className="product-thumb">
         <div className="glide__track" data-glide-el="track">
@@ -42,8 +42,7 @@ const ProductGallery = ({ singleProduct }) => {
                     onClick={() => handleThumbnailClick(image)}
                   />
                 </li>
-              ))
-            }
+              ))}
           </ol>
         </div>
         <div className="glide__arrows" data-glide-el="controls">

@@ -9,7 +9,7 @@ const productSchema = new mongoose.Schema(
     colors: { type: Array, default: [] },
     sizes: { type: Array, default: ["XS", "SM", "M", "L", "XL", "XXL"] },
     stockCode: { type: String, default: "" },
-    discount: { type: Number, deafult: 0.0 },
+    discount: { type: Number, default: 0.0 },
     category: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Category",

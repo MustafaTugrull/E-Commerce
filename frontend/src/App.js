@@ -20,6 +20,9 @@ import CreateBlog from "./pages/Admin/Blogs/CreateBlog";
 import UpdateBlogs from "./pages/Admin/Blogs/UpdateBlog";
 import UserList from "./pages/Admin/Users/UserList";
 import UpdateUser from "./pages/Admin/Users/UpdateUser";
+import CouponList from "./pages/Admin/Coupons/CouponList";
+import CreateCoupon from "./pages/Admin/Coupons/CreateCoupon";
+import UpdateCoupon from "./pages/Admin/Coupons/UpdateCoupon";
 function App() {
   return (
     <div className="App">
@@ -43,6 +46,9 @@ function App() {
           <Route path="blogs" element={<Blogs />} />
           <Route path="blogs/create" element={<CreateBlog />} />
           <Route path="blogs/update/:id" element={<UpdateBlogs />} />
+          <Route path="coupons" element={<CouponList />} />
+          <Route path="coupons/create" element={<CreateCoupon />} />
+          <Route path="coupons/update/:id" element={<UpdateCoupon />} />
           <Route path="users" element={<UserList />} />
           <Route path="users/update/:id" element={<UpdateUser />} />
         </Route>

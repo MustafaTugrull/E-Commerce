@@ -3,12 +3,12 @@ import ProductGallery from "./Gallery/ProductGallery";
 import ProductInfo from "./Info/ProductInfo";
 
 
-const SingleContent = ({ singleProduct }) => {
+const SingleContent = () => {
   return (
     <div className="single-content">
       <main className="site-main">
-        <ProductGallery singleProduct={singleProduct} />
-        <ProductInfo singleProduct={singleProduct}/>
+        <ProductGallery  />
+        <ProductInfo />
       </main>
     </div>
   );

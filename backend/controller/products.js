@@ -6,7 +6,7 @@ const Product = require("../models/Product.js");
 router.post("/", async (req, res) => {
   try {
     const newProduct = new Product(req.body);
-    newProduct.save();
+    await newProduct.save();
     res.status(201).json(newProduct);
   } catch (error) {
     console.log(error);

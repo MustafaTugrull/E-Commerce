@@ -1,15 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./ProductInfo.css";
 import { CartContext } from "../../../contexts/CartProvider";
+import { ProductContext } from "../../../contexts/ProductProvider";
 
-const ProductInfo = ({ singleProduct }) => {
+const ProductInfo = () => {
+  const { singleProduct } = useContext(ProductContext);
   const [product, setProduct] = useState(null);
   const { addToCart } = useContext(CartContext);
 
   useEffect(() => {
     setProduct(singleProduct);
   }, singleProduct);
-  console.log(singleProduct);
+  // console.log(singleProduct);
 
   return (
     <div className="product-info">

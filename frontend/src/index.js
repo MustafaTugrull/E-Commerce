@@ -6,16 +6,19 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Layout } from "./Layouts/Layout";
 import CartProvider from "./contexts/CartProvider";
+import ProductProvider from "./contexts/ProductProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   //<React.StrictMode>
   <Router>
-    <CartProvider>
-      <Layout>
-        <App />
-      </Layout>
-    </CartProvider>
+    <ProductProvider>
+      <CartProvider>
+        <Layout>
+          <App />
+        </Layout>
+      </CartProvider>
+    </ProductProvider>
   </Router>
   //</React.StrictMode>
 );
