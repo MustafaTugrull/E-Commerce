@@ -23,18 +23,19 @@ const CouponList = () => {
 
   const deleteCoupon = async (couponId) => {
     try {
-      const response = await fetch("http://localhost:5000/api/coupons", {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ _id: couponId }),
-      });
+      const response = await fetch(
+        `http://localhost:5000/api/coupons/${couponId}`,
+        {
+          method: "DELETE",
+        }
+      );
       if (response.ok) {
         message.success("Kupon başarıyla silindi...");
-        navigate("/admin/coupons");
+        setDataSource((prevCoupon) => {
+          return prevCoupon.filter((coupon) => coupon._id !== couponId);
+        });
       } else {
-        message.error("Kupon silinemedi...");
+        message.error("Silme işlemi başarısız...");
       }
     } catch (error) {
       console.log("Sunucu hatası...");
@@ -43,40 +44,40 @@ const CouponList = () => {
 
   useEffect(() => {
     getCoupons();
-    }, [dataSource]);
+  }, [dataSource]);
 
-    const formatDate = (date) => {
-      const options = { year: "numeric", month: "short", day: "numeric" };
-      return new Date(date).toLocaleDateString("tr-TR", options); 
-    };
+  const formatDate = (date) => {
+    const options = { year: "numeric", month: "short", day: "numeric" };
+    return new Date(date).toLocaleDateString("tr-TR", options);
+  };
 
   const columns = [
     {
       title: "Code",
       dataIndex: "code",
       key: "code",
-      with: "25%",
+      width: "25%",
       render: (text) => text,
     },
     {
       title: "Discount",
       dataIndex: "discount",
       key: "discount",
-      with: "25%",
+      width: "25%",
       render: (text) => text,
     },
     {
       title: "Expired",
       dataIndex: "expired",
       key: "expired",
-      with: "25%",
+      width: "25%",
       render: (text) => formatDate(text),
     },
     {
       title: "Count",
       dataIndex: "count",
       key: "count",
-      with: "25%",
+      width: "25%",
       render: (text) => text,
     },
     {
