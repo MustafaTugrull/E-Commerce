@@ -54,8 +54,8 @@ router.get("/:couponcode", async (req, res) => {
       return res.status(404).json({ error: "COUPON not found" });
     }
 
-    const { discount, expired, count } = coupon;
-    res.status(200).json({ discount, expired, count });
+    const { _id, discount, expired, count } = coupon;
+    res.status(200).json({ _id, discount, expired, count });
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Sunucu hatası..." });

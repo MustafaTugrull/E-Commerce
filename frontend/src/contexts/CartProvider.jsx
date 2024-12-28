@@ -8,11 +8,25 @@ const CartProvider = ({ children }) => {
       : []
   );
 
-  const calculatePrice = (product) =>{
-    return product.price -(product.price * product.discount);
-  }
+  const [couponDiscount, setCouponDiscount] = useState(0);
+  const calculatePrice = (product) => {
+    return product.price - product.price * product.discount;
+  };
+
+  const [couponCode, setCouponCode] = useState("");
+
   const addToCart = (cartItem) => {
-    setCartItems([...cartItems, cartItem]);
+    const existingItem = cartItems.find(item => item._id === cartItem._id);
+    if (existingItem) {
+      const updatedItems = cartItems.map(item =>
+        item._id === cartItem._id
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
+      );
+      setCartItems(updatedItems);
+    } else {
+      setCartItems([...cartItems, { ...cartItem, quantity: 1 }]);
+    }
   };
 
   const removeFromCart = (productId) => {
@@ -20,6 +34,17 @@ const CartProvider = ({ children }) => {
       return productId !== item._id;
     });
     setCartItems(filterCarts);
+    setCouponDiscount(0);
+  };
+
+  const updateQuantity = (productId, quantity) => {
+    if (quantity < 1) return;
+    const updatedItems = cartItems.map(item =>
+      item._id === productId
+        ? { ...item, quantity }
+        : item
+    );
+    setCartItems(updatedItems);
   };
 
   useEffect(() => {
@@ -32,7 +57,12 @@ const CartProvider = ({ children }) => {
         addToCart: addToCart,
         setCartItems: setCartItems,
         removeFromCart,
-        calculatePrice:calculatePrice,
+        calculatePrice: calculatePrice,
+        couponCode,
+        setCouponCode,
+        couponDiscount,
+        setCouponDiscount,
+        updateQuantity,
       }}
     >
       {children}

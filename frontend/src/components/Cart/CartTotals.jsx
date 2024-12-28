@@ -1,17 +1,23 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { CartContext } from "../../contexts/CartProvider";
 
 const CartTotals = () => {
-  const { cartItems, calculatePrice } = useContext(CartContext);
+  const { cartItems, calculatePrice, couponDiscount, setCouponDiscount } =
+    useContext(CartContext);
   const [fastCargo, setFastCargo] = useState(false);
-  const totalPrice = cartItems.map((product) => {
-    return calculatePrice(product);
-  });
-  // console.log(totalPrice);
-  const cargoPrice = 15.0;
-  const result = totalPrice.reduce((prev, current) => {
-    return prev + current;
+
+  const totalPrice = cartItems.reduce((total, product) => {
+    const unitPrice = calculatePrice(product);
+    return total + unitPrice * product.quantity;
   }, 0);
+
+  let result = totalPrice * (1 - couponDiscount / 100);
+
+  const cargoPrice = 15.0;
+
+  useEffect(() => {
+    setCouponDiscount(0);
+  }, window.location.pathname);
 
   const generalTotals = fastCargo
     ? (result + cargoPrice).toFixed(2)
