@@ -40,6 +40,7 @@ const CartTable = () => {
                   type="number"
                   value={product.quantity}
                   min="1"
+                  max="10"
                   onChange={(e) =>
                     updateQuantity(product._id, parseInt(e.target.value) || 1)
                   }
